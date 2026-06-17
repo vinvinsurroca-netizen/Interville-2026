@@ -1,112 +1,223 @@
 <!DOCTYPE html>
+
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interville de 2026</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-            background-color: #1a1a2e; /* Fond bleu nuit */
-            color: #e0e0e0; /* Texte gris clair par défaut */
-        }
+    <title>Interville 2026</title>
 
-        /* Conteneur principal masqué au début */
-        .main-content {
-            display: none;
-        }
+```
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
 
-        h1 {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 4rem;
-            margin: 20px 0;
-            color: #ffffff; /* Blanc pour le titre */
-            letter-spacing: 2px;
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 0;
+        padding: 20px;
+        background-color: #1a1a2e;
+        color: #e0e0e0;
+    }
 
-        p {
-            font-size: 1.5rem;
-            margin: 20px 0;
-            color: #e0e0e0; /* Gris clair pour le texte */
-        }
+    .main-content {
+        display: none;
+        animation: fadeIn 1s ease;
+    }
 
-        .gif-container {
-            display: flex;
-            justify-content: center;
-            margin: 30px 0;
-        }
+    h1 {
+        font-family: 'Bebas Neue', cursive;
+        font-size: 4rem;
+        margin: 20px 0;
+        color: #ffffff;
+        letter-spacing: 2px;
+        animation: pulseTitle 2s infinite;
+    }
 
-        .gif-container img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-        }
+    p {
+        font-size: 1.5rem;
+        margin: 20px 0;
+        color: #e0e0e0;
+    }
 
-        /* Style du bouton initial */
-        .start-button {
-            background-color: #4a4a8a; /* Bleu foncé pour le bouton */
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2rem;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 50px auto;
-            display: block;
-            transition: background-color 0.3s;
-        }
+    .gif-container {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0;
+    }
 
-        .start-button:hover {
-            background-color: #3a3a6a; /* Bleu plus foncé au survol */
+    .gif-container img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    .start-button {
+        background-color: #4a4a8a;
+        color: white;
+        border: none;
+        padding: 20px 35px;
+        font-size: 1.3rem;
+        border-radius: 8px;
+        cursor: pointer;
+        margin: 50px auto;
+        display: block;
+        transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .start-button:hover {
+        background-color: #3a3a6a;
+        transform: scale(1.03);
+    }
+
+    .button-subtitle {
+        display: block;
+        font-size: 0.75rem;
+        margin-top: 8px;
+        opacity: 0.85;
+        font-weight: normal;
+    }
+
+    .cagnotte-container {
+        margin-top: 50px;
+    }
+
+    .cagnotte-text {
+        font-size: 1.3rem;
+        font-weight: bold;
+        color: #ffd166;
+        margin-bottom: 15px;
+        animation: pulse 2s infinite;
+    }
+
+    .cagnotte-button {
+        display: inline-block;
+        background: linear-gradient(45deg, #ffb703, #ffd166);
+        color: #1a1a2e;
+        text-decoration: none;
+        padding: 18px 35px;
+        border-radius: 12px;
+        font-size: 1.3rem;
+        font-weight: bold;
+        box-shadow: 0 0 20px rgba(255, 183, 3, 0.6);
+        transition: all 0.3s ease;
+    }
+
+    .cagnotte-button:hover {
+        transform: scale(1.08);
+        box-shadow: 0 0 30px rgba(255, 183, 3, 0.9);
+    }
+
+    .cagnotte-arrows {
+        font-size: 2rem;
+        margin-top: 10px;
+        animation: bounce 1s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% {
+            opacity: 1;
         }
-    </style>
+        50% {
+            opacity: 0.7;
+        }
+    }
+
+    @keyframes bounce {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-8px);
+        }
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(15px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulseTitle {
+        0%,100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.05);
+        }
+    }
+</style>
+```
+
 </head>
 <body>
-    <!-- Bouton initial (seul élément visible au début) -->
-    <button class="start-button" id="startButton">🎵 Démarrer l'expérience</button>
 
-    <!-- Contenu principal (masqué au début) -->
-    <div class="main-content" id="mainContent">
-        <h1>🎉 Interville de 2026 🎉</h1>
-        <p>Merci à toi pour ton inscription, tié un tigre 🐯 !</p>
+```
+<button class="start-button" id="startButton">
+    🎵 Démarrer l'expérience
+    <span class="button-subtitle">🔊 Activez le son avant de continuer</span>
+</button>
 
-        <div class="gif-container">
-            <img src="./gif13.gif" alt="GIF de confirmation">
-        </div>
+<div class="main-content" id="mainContent">
 
-        <!-- Espace réservé pour le lien de la cagnotte -->
-        <div id="cagnotte-link"></div>
+    <h1>🎉 Interville 2026 🎉</h1>
+
+    <p>
+        Merci à toi pour ton inscription,<br>
+        <strong>tié un tigre 🐯 !</strong>
+    </p>
+
+    <div class="gif-container">
+        <img src="./gif13.gif" alt="GIF de confirmation">
     </div>
 
-    <!-- Musique de fond -->
-    <audio id="background-music" preload="auto" loop playsinline>
-        <source src="./miaw.mp3" type="audio/mpeg">
-        Ton navigateur ne supporte pas l'audio.
-    </audio>
+    <div class="cagnotte-container">
+        <p class="cagnotte-text">
+            💸 Maintenant faut payer... envoie l'oseille ! 💸
+        </p>
 
-    <script>
-        const startButton = document.getElementById('startButton');
-        const mainContent = document.getElementById('mainContent');
-        const audio = document.getElementById('background-music');
+        <a
+            href="https://www.onparticipe.fr/c/QnABVMi2"
+            target="_blank"
+            class="cagnotte-button"
+        >
+            🎁 Participer à la cagnotte 🎁
+        </a>
 
-        // Fonction pour démarrer l'expérience
-        startButton.addEventListener('click', function() {
-            audio.play()
-                .then(() => {
-                    startButton.style.display = 'none';
-                    mainContent.style.display = 'block';
-                })
-                .catch(error => {
-                    console.error("Erreur de lecture :", error);
-                    alert("Impossible de lancer la musique. Vérifiez le fichier ou essayez un autre navigateur.");
-                });
+        <p class="cagnotte-arrows">
+            ⬆️ ⬆️ ⬆️
+        </p>
+    </div>
+
+</div>
+
+<audio id="background-music" preload="auto" loop playsinline>
+    <source src="./miaw.mp3" type="audio/mpeg">
+    Ton navigateur ne supporte pas l'audio.
+</audio>
+
+<script>
+    const startButton = document.getElementById('startButton');
+    const mainContent = document.getElementById('mainContent');
+    const audio = document.getElementById('background-music');
+
+    startButton.addEventListener('click', function () {
+
+        audio.play().catch(error => {
+            console.log("Lecture audio refusée :", error);
         });
-    </script>
+
+        startButton.style.display = 'none';
+        mainContent.style.display = 'block';
+    });
+</script>
+```
+
 </body>
 </html>
