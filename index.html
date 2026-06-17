@@ -64,23 +64,6 @@
         .start-button:hover {
             background-color: #1a252f;
         }
-
-        /* Bouton pour contrôler la musique (après le clic initial) */
-        .music-button {
-            background-color: #2c3e50;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 20px 0;
-            transition: background-color 0.3s;
-        }
-
-        .music-button:hover {
-            background-color: #1a252f;
-        }
     </style>
 </head>
 <body>
@@ -91,9 +74,6 @@
     <div class="main-content" id="mainContent">
         <h1>Interville de 2026</h1>
         <p>Merci à toi pour ton inscription, tié un tigre</p>
-
-        <!-- Bouton pour contrôler la musique -->
-        <button class="music-button" id="musicButton">⏸️ Arrêter la musique</button>
 
         <div class="gif-container">
             <img src="./gif13.gif" alt="GIF de confirmation">
@@ -113,7 +93,6 @@
         const startButton = document.getElementById('startButton');
         const mainContent = document.getElementById('mainContent');
         const audio = document.getElementById('background-music');
-        const musicButton = document.getElementById('musicButton');
 
         // Fonction pour démarrer l'expérience
         startButton.addEventListener('click', function() {
@@ -129,17 +108,6 @@
                     console.error("Erreur de lecture :", error);
                     alert("Impossible de lancer la musique. Vérifiez le fichier ou essayez un autre navigateur.");
                 });
-        });
-
-        // Fonction pour contrôler la musique (pause/reprise)
-        musicButton.addEventListener('click', function() {
-            if (audio.paused) {
-                audio.play();
-                musicButton.textContent = "⏸️ Arrêter la musique";
-            } else {
-                audio.pause();
-                musicButton.textContent = "⏯️ Démarrer la musique";
-            }
         });
     </script>
 </body>
