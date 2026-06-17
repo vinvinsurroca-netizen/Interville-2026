@@ -13,8 +13,8 @@
             text-align: center;
             margin: 0;
             padding: 20px;
-            background-color: #f5f5f5;
-            color: #333;
+            background-color: #1a1a2e; /* Fond bleu nuit */
+            color: #e0e0e0; /* Texte gris clair par défaut */
         }
 
         /* Conteneur principal masqué au début */
@@ -26,13 +26,14 @@
             font-family: 'Bebas Neue', cursive;
             font-size: 4rem;
             margin: 20px 0;
-            color: #2c3e50;
+            color: #ffffff; /* Blanc pour le titre */
             letter-spacing: 2px;
         }
 
         p {
             font-size: 1.5rem;
             margin: 20px 0;
+            color: #e0e0e0; /* Gris clair pour le texte */
         }
 
         .gif-container {
@@ -49,7 +50,7 @@
 
         /* Style du bouton initial */
         .start-button {
-            background-color: #2c3e50;
+            background-color: #4a4a8a; /* Bleu foncé pour le bouton */
             color: white;
             border: none;
             padding: 15px 30px;
@@ -62,7 +63,7 @@
         }
 
         .start-button:hover {
-            background-color: #1a252f;
+            background-color: #3a3a6a; /* Bleu plus foncé au survol */
         }
     </style>
 </head>
@@ -72,8 +73,8 @@
 
     <!-- Contenu principal (masqué au début) -->
     <div class="main-content" id="mainContent">
-        <h1>Interville de 2026</h1>
-        <p>Merci à toi pour ton inscription, tié un tigre</p>
+        <h1>🎉 Interville de 2026 🎉</h1>
+        <p>Merci à toi pour ton inscription, tié un tigre 🐯 !</p>
 
         <div class="gif-container">
             <img src="./gif13.gif" alt="GIF de confirmation">
@@ -96,12 +97,9 @@
 
         // Fonction pour démarrer l'expérience
         startButton.addEventListener('click', function() {
-            // Démarre la musique
             audio.play()
                 .then(() => {
-                    // Masque le bouton initial
                     startButton.style.display = 'none';
-                    // Affiche le contenu principal
                     mainContent.style.display = 'block';
                 })
                 .catch(error => {
