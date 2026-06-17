@@ -17,6 +17,11 @@
             color: #333;
         }
 
+        /* Conteneur principal masqué au début */
+        .main-content {
+            display: none;
+        }
+
         h1 {
             font-family: 'Bebas Neue', cursive;
             font-size: 4rem;
@@ -42,6 +47,25 @@
             border-radius: 8px;
         }
 
+        /* Style du bouton initial */
+        .start-button {
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 50px auto;
+            display: block;
+            transition: background-color 0.3s;
+        }
+
+        .start-button:hover {
+            background-color: #1a252f;
+        }
+
+        /* Bouton pour contrôler la musique (après le clic initial) */
         .music-button {
             background-color: #2c3e50;
             color: white;
@@ -57,22 +81,27 @@
         .music-button:hover {
             background-color: #1a252f;
         }
-
-        .error-message {
-            color: red;
-            margin: 10px 0;
-        }
     </style>
 </head>
 <body>
-    <h1>Interville de 2026</h1>
-    <p>Merci à toi pour ton inscription, tié un tigre</p>
+    <!-- Bouton initial (seul élément visible au début) -->
+    <button class="start-button" id="startButton">🎵 Démarrer l'expérience</button>
 
-    <!-- Bouton pour contrôler la musique -->
-    <button class="music-button" id="musicButton">
-        ⏯️ Démarrer / Arrêter la musique
-    </button>
-    <p class="error-message" id="error-message"></p>
+    <!-- Contenu principal (masqué au début) -->
+    <div class="main-content" id="mainContent">
+        <h1>Interville de 2026</h1>
+        <p>Merci à toi pour ton inscription, tié un tigre</p>
+
+        <!-- Bouton pour contrôler la musique -->
+        <button class="music-button" id="musicButton">⏸️ Arrêter la musique</button>
+
+        <div class="gif-container">
+            <img src="./gif13.gif" alt="GIF de confirmation">
+        </div>
+
+        <!-- Espace réservé pour le lien de la cagnotte -->
+        <div id="cagnotte-link"></div>
+    </div>
 
     <!-- Musique de fond -->
     <audio id="background-music" preload="auto" loop playsinline>
@@ -80,35 +109,33 @@
         Ton navigateur ne supporte pas l'audio.
     </audio>
 
-    <div class="gif-container">
-        <img src="./gif13.gif" alt="GIF de confirmation">
-    </div>
-
-    <!-- Espace réservé pour le lien de la cagnotte -->
-    <div id="cagnotte-link"></div>
-
     <script>
+        const startButton = document.getElementById('startButton');
+        const mainContent = document.getElementById('mainContent');
         const audio = document.getElementById('background-music');
         const musicButton = document.getElementById('musicButton');
-        const errorMessage = document.getElementById('error-message');
 
-        // Vérifie si le fichier audio existe
-        audio.addEventListener('error', function() {
-            errorMessage.textContent = "Erreur : Fichier audio introuvable. Vérifiez le chemin.";
+        // Fonction pour démarrer l'expérience
+        startButton.addEventListener('click', function() {
+            // Démarre la musique
+            audio.play()
+                .then(() => {
+                    // Masque le bouton initial
+                    startButton.style.display = 'none';
+                    // Affiche le contenu principal
+                    mainContent.style.display = 'block';
+                })
+                .catch(error => {
+                    console.error("Erreur de lecture :", error);
+                    alert("Impossible de lancer la musique. Vérifiez le fichier ou essayez un autre navigateur.");
+                });
         });
 
-        // Fonction pour démarrer/arrêter la musique
+        // Fonction pour contrôler la musique (pause/reprise)
         musicButton.addEventListener('click', function() {
             if (audio.paused) {
-                audio.play()
-                    .then(() => {
-                        musicButton.textContent = "⏸️ Arrêter la musique";
-                        errorMessage.textContent = "";
-                    })
-                    .catch(error => {
-                        console.error("Erreur de lecture :", error);
-                        errorMessage.textContent = "Impossible de lancer la musique. Vérifiez le fichier ou essayez un autre navigateur.";
-                    });
+                audio.play();
+                musicButton.textContent = "⏸️ Arrêter la musique";
             } else {
                 audio.pause();
                 musicButton.textContent = "⏯️ Démarrer la musique";
