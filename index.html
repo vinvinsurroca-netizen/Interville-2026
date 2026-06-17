@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interville de 2026</title>
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
-
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -59,21 +57,25 @@
         .music-button:hover {
             background-color: #1a252f;
         }
+
+        .error-message {
+            color: red;
+            margin: 10px 0;
+        }
     </style>
 </head>
 <body>
-
     <h1>Interville de 2026</h1>
-
     <p>Merci à toi pour ton inscription, tié un tigre</p>
 
     <!-- Bouton pour contrôler la musique -->
-    <button class="music-button" onclick="toggleMusic()">
+    <button class="music-button" id="musicButton">
         ⏯️ Démarrer / Arrêter la musique
     </button>
+    <p class="error-message" id="error-message"></p>
 
     <!-- Musique de fond -->
-    <audio id="background-music" loop playsinline>
+    <audio id="background-music" preload="auto" loop playsinline>
         <source src="./miaw.mp3" type="audio/mpeg">
         Ton navigateur ne supporte pas l'audio.
     </audio>
@@ -87,18 +89,31 @@
 
     <script>
         const audio = document.getElementById('background-music');
+        const musicButton = document.getElementById('musicButton');
+        const errorMessage = document.getElementById('error-message');
 
-        function toggleMusic() {
+        // Vérifie si le fichier audio existe
+        audio.addEventListener('error', function() {
+            errorMessage.textContent = "Erreur : Fichier audio introuvable. Vérifiez le chemin.";
+        });
+
+        // Fonction pour démarrer/arrêter la musique
+        musicButton.addEventListener('click', function() {
             if (audio.paused) {
-                audio.play().catch(error => {
-                    console.error("Erreur lors de la lecture :", error);
-                    alert("Impossible de lancer la musique sur cet appareil.");
-                });
+                audio.play()
+                    .then(() => {
+                        musicButton.textContent = "⏸️ Arrêter la musique";
+                        errorMessage.textContent = "";
+                    })
+                    .catch(error => {
+                        console.error("Erreur de lecture :", error);
+                        errorMessage.textContent = "Impossible de lancer la musique. Vérifiez le fichier ou essayez un autre navigateur.";
+                    });
             } else {
                 audio.pause();
+                musicButton.textContent = "⏯️ Démarrer la musique";
             }
-        }
+        });
     </script>
-
 </body>
 </html>
