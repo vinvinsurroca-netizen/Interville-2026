@@ -16,7 +16,7 @@
             background-color: #f5f5f5;
             color: #333;
         }
-        
+
         h1 {
             font-family: 'Bebas Neue', cursive;
             font-size: 4rem;
@@ -24,37 +24,36 @@
             color: #2c3e50;
             letter-spacing: 2px;
         }
-        
+
         p {
             font-size: 1.5rem;
             margin: 20px 0;
         }
-        
+
         .gif-container {
             display: flex;
             justify-content: center;
             margin: 30px 0;
         }
-        
+
         .gif-container img {
             max-width: 100%;
             height: auto;
             border-radius: 8px;
         }
-        
-        /* Style pour le bouton */
+
         .music-button {
             background-color: #2c3e50;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 1rem;
             border-radius: 5px;
             cursor: pointer;
             margin: 20px 0;
             transition: background-color 0.3s;
         }
-        
+
         .music-button:hover {
             background-color: #1a252f;
         }
@@ -63,35 +62,49 @@
 <body>
     <h1>Interville de 2026</h1>
     <p>Merci à toi pour ton inscription, tié un tigre</p>
-    
+
     <!-- Bouton pour contrôler la musique -->
-    <button class="music-button" onclick="toggleMusic()">⏯️ Démarrer/Arrêter la musique</button>
-    
+    <button class="music-button" id="musicButton">⏯️ Démarrer/Arrêter la musique</button>
+
     <!-- Musique de fond -->
-    <audio id="background-music" loop>
-        <source src="./miaw.mp3" type="audio/mpeg">
+    <audio id="background-music" preload="auto" loop>
+        <source src="[URL_BRUTE_MIAW_MP3]" type="audio/mpeg">
         Ton navigateur ne supporte pas l'audio.
     </audio>
-    
+
     <div class="gif-container">
         <img src="./gif13.gif" alt="GIF de confirmation">
     </div>
-    
+
     <!-- Espace réservé pour le lien de la cagnotte -->
     <div id="cagnotte-link"></div>
-    
+
     <script>
-        // Récupère l'élément audio
         const audio = document.getElementById('background-music');
-        
+        const musicButton = document.getElementById('musicButton');
+
+        // Initialise l'audio
+        audio.load();
+
         // Fonction pour démarrer/arrêter la musique
-        function toggleMusic() {
+        musicButton.addEventListener('click', function() {
             if (audio.paused) {
-                audio.play();
+                audio.play()
+                    .then(() => {
+                        musicButton.textContent = "⏸️ Arrêter la musique";
+                    })
+                    .catch(error => {
+                        console.error("Erreur de lecture :", error);
+                        alert("Impossible de lire la musique. Vérifiez le fichier ou le navigateur.");
+                    });
             } else {
                 audio.pause();
+                musicButton.textContent = "⏯️ Démarrer la musique";
             }
-        }
+        });
     </script>
 </body>
 </html>
+
+
+
